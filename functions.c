@@ -37,7 +37,8 @@ while(1){
     printf("\nMenu\n");
     printf("1. Shapes\n");
     printf("2. Calculator\n");
-    printf("3. Exit\n");
+    printf("3. RockPaperScissor\n");
+    printf("4. Exit\n");
 
     int sel;
     if(GetInputInt("Select choice: ", &sel)) return sel;

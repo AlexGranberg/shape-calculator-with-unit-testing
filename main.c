@@ -13,7 +13,7 @@ system("cls");
 
 while(1){
     int sel = choice();
-    if(sel == 1) printf("Hej 1\n");
+    if(sel == 1) shapesSelection();
     if(sel == 2) {
         float number1 = 0;
         float number2 = 0;
@@ -27,7 +27,8 @@ while(1){
         result = calculator(number1, number2, operator);
         printf("The result is: %.2f", result);
     } 
-    if(sel == 3) break;
+    if(sel == 3) printf("Rock paper sissor");
+    if(sel == 4) break;
 
 
 }
