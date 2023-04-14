@@ -3,6 +3,8 @@
 #include "SafeInput.h"
 #include <stdlib.h>
 #include <math.h>
+#include <ctype.h>
+#include <string.h>
 
 void rectangleParallelogram(float *resultArea, float *resultCircumference){
     float side1 = 0;
@@ -22,19 +24,36 @@ void shapesSelection(){
     printf("4. Circle\n");
     printf("5. Back to menu\n");
 
-    int sel;
-    if(GetInputInt("Which shape would you like to calculate area and circumference? ", &sel));
-    else{
-        printf("Not a valid entry!\n");
-    }
+    char text[50];
+    GetInput("Which shape would you like to calculate area and circumference? ", text, 50);
+
+
     float resultArea = 0;
     float resultCircumference = 0;
-    if(sel == 1) { 
+
+    for (int i = 0; i < strlen(text); i++){
+        text[i] = tolower(text[i]);
+    }
+
+    char* rect = "rectangle";
+    char* para = "parallelogram";
+    // char triangle = "triangle";
+    // char circle = "circle";
+
+    if(strcmp(text, rect) == 0){
         rectangleParallelogram(&resultArea, &resultCircumference);
         printf("The area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
-    if(sel == 2) printf("Test2");
-    if(sel == 3) printf("Test3");
-    if(sel == 4) printf("Test4");
-    if(sel == 5) choice();
+    else if(strcmp(text, para) == 0){
+        rectangleParallelogram(&resultArea, &resultCircumference);
+        printf("The area of the parallelogram is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
+    }
+    // if(sel == 1) { 
+    //     rectangleParallelogram(&resultArea, &resultCircumference);
+    //     printf("The area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
+    // }
+    // if(sel == 2) printf("Test2");
+    // if(sel == 3) printf("Test3");
+    // if(sel == 4) printf("Test4");
+    // if(sel == 5) choice();
 }
