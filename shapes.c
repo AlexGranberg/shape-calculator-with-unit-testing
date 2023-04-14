@@ -6,7 +6,45 @@
 #include <ctype.h>
 #include <string.h>
 
-void rectangleParallelogram(float *resultArea, float *resultCircumference){
+#define PI 3.14159265358979323846
+
+char* shapesSelection(){
+    char text[50];
+    while(1){
+    GetInput("Type the shape you would like to calculate the area and circumference off? ", text, 50);
+
+    for (int i = 0; i < strlen(text); i++){
+        text[i] = tolower(text[i]);
+    }
+
+    char* rect = "rectangle";
+    char* para = "parallelogram";
+    char* triangle = "triangle";
+    char* circle = "circle";
+    char* exit = "exit";
+
+    if(strcmp(text, rect) == 0){
+        return rect;
+    }
+    else if(strcmp(text, para) == 0){
+        return para;
+    }
+    else if(strcmp(text, triangle) == 0){
+        return triangle;
+    }
+    else if(strcmp(text, circle) == 0){
+        return circle;
+    }
+    else if(strcmp(text, exit) == 0){
+        return exit;
+    }
+    else{
+        printf("Not a valid shape.\n");
+    }
+}
+}
+
+void calcRectangleParallelogram(float *resultArea, float *resultCircumference){
     float side1 = 0;
     float side2 = 0;
     GetInputFloat("Enter the lenght: ", &side1);
@@ -15,45 +53,72 @@ void rectangleParallelogram(float *resultArea, float *resultCircumference){
     *resultCircumference = (side1 + side2) * 2;
 }
 
-void shapesSelection(){
+float calcHypotenuse(float l, float h, float theta) {
+    float radians = theta * PI / 180.0;    // Convert angle from degrees to radians
+    float c = h / sin(radians);              // Calculate the hypotenuse using the sine function
+    return c;
+}
 
-    printf("\nShapes Menu:\n"); //should be string not number.
-    printf("1. Rectangle\n");
-    printf("2. Parallelogram\n");
-    printf("3. Triangle\n");
-    printf("4. Circle\n");
-    printf("5. Back to menu\n");
+void calcTriangle(float *resultArea, float *resultCircumference){
+    float side1 = 0;
+    float side2 = 0;
+    float angle = 0;
+    
+    GetInputFloat("Enter the lenght: ", &side1);
+    GetInputFloat("Enter the height: ", &side2);
+    GetInputFloat("Enter the angle: ", &angle);
+    float side3 = calcHypotenuse(side1, side2, angle);
+    *resultArea = side1 * side2 /2;
+    *resultCircumference = side1 + side2 + side3;
+}
 
-    char text[50];
-    GetInput("Which shape would you like to calculate area and circumference? ", text, 50);
+void calcCircle(float *resultArea, float *resultCircumference){
+    float radius = 0;
+    GetInputFloat("Enter the radie: ", &radius);
+    *resultArea = PI * radius * radius;
+    *resultCircumference = 2 * PI * radius;
+}
 
+void shapesMenu(){
+
+    printf("\nShapes Menu:\n");
+    printf(" Rectangle\n");
+    printf(" Parallelogram\n");
+    printf(" Triangle\n");
+    printf(" Circle\n");
+    printf(" Exit\n");
+
+    char* text = shapesSelection();
+    char* rect = "rectangle";
+    char* para = "parallelogram";
+    char* triangle = "triangle";
+    char* circle = "circle";
+    char* exit = "exit";
 
     float resultArea = 0;
     float resultCircumference = 0;
 
-    for (int i = 0; i < strlen(text); i++){
-        text[i] = tolower(text[i]);
-    }
-
-    char* rect = "rectangle";
-    char* para = "parallelogram";
-    // char triangle = "triangle";
-    // char circle = "circle";
-
     if(strcmp(text, rect) == 0){
-        rectangleParallelogram(&resultArea, &resultCircumference);
-        printf("The area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
+        calcRectangleParallelogram(&resultArea, &resultCircumference);
+        printf("\nThe area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, para) == 0){
-        rectangleParallelogram(&resultArea, &resultCircumference);
-        printf("The area of the parallelogram is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
+        calcRectangleParallelogram(&resultArea, &resultCircumference);
+        printf("\nThe area of the parallelogram is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
-    // if(sel == 1) { 
-    //     rectangleParallelogram(&resultArea, &resultCircumference);
-    //     printf("The area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
-    // }
-    // if(sel == 2) printf("Test2");
-    // if(sel == 3) printf("Test3");
-    // if(sel == 4) printf("Test4");
-    // if(sel == 5) choice();
+    else if(strcmp(text, triangle) == 0){
+        calcTriangle(&resultArea, &resultCircumference);
+        printf("\nThe area of the Triangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
+    }
+    else if(strcmp(text, circle) == 0){
+        calcCircle(&resultArea, &resultCircumference);
+        printf("\nThe area of the Circle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
+    }    
+    else if(strcmp(text, exit) == 0){
+
+    }
+    else{
+        printf("Not a valid shape.");
+    }
+
 }

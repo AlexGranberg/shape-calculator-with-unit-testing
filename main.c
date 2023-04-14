@@ -13,7 +13,7 @@ system("cls");
 
 while(1){
     int sel = choice();
-    if(sel == 1) shapesSelection();
+    if(sel == 1) shapesMenu();
     if(sel == 2) {
         float number1 = 0;
         float number2 = 0;
