@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
 #include "SafeInput.h"
 #include <stdbool.h>
 #include "functions.h"
+#include "calculator.h"
+#include "shapes.h"
 
 
 int main(){
