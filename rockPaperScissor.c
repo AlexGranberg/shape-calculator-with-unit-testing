@@ -22,7 +22,7 @@ void playGame(){
     printf("3. Scissor\n");
     GetInputInt("", &sel);
     int pick = CpuRandPick();
-    if(pick == 1 && sel == 2) printf("Computer chosed ROCK! You won\n");
+    if(pick == 1 && sel == 2) {printf("Computer chosed ROCK! "); green(); printf("You won\n"); reset();}
     else if(pick == 1 && sel == 3) printf("Computer chosed ROCK! You loose\n");
     else if(pick == 1 && sel == 1) printf("Computer chosed ROCK! It's a tie\n");
 
