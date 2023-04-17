@@ -81,7 +81,9 @@ void calcCircle(float *resultArea, float *resultCircumference){
 
 void shapesMenu(){
 
-    printf("\nShapes Menu:\n");
+    blue();
+    printf("\n::: Shapes :::\n");
+    reset();
     printf(" Rectangle\n");
     printf(" Parallelogram\n");
     printf(" Triangle\n");

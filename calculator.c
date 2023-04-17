@@ -1,5 +1,8 @@
 #include <math.h>
 #include <stdio.h>
+#include "SafeInput.h"
+#include "functions.h"
+
 
 float calculator(float number1, float number2, char operator){
   float result = 0;
@@ -26,3 +29,21 @@ float calculator(float number1, float number2, char operator){
   }
 return result;
 }
+
+void calculatorMenu(){
+float number1 = 0;
+float number2 = 0;
+char operator;
+float result = 0;
+  blue();
+  printf("\n::: Calculator :::\n");
+  reset();
+  GetInputFloat("Enter first number: ", &number1);
+  GetInputFloat("Enter second number: ", &number2);
+  GetInputChar("Enter operator: (+,-,*,/,%) ", &operator);
+        
+  result = calculator(number1, number2, operator);
+  printf("The result is: %.2f", result);
+
+}
+

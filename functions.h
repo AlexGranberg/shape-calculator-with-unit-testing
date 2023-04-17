@@ -7,6 +7,7 @@ int choice();
 
 void red(); 
 void green();
+void blue();
 void reset();
 
 

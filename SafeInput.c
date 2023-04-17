@@ -51,24 +51,38 @@ bool GetInputInt(char* prompt, int* value)
 
 bool GetInputFloat(char* prompt, float* value)
 {
-	char buff[255];
-	if (GetInput(prompt, buff, sizeof(buff)) != INPUT_RESULT_OK)
-		return false;
-	float l = -100000000.0f;
-
-    if(!parseFloat(buff,&l)) return false;
-	*value = l;
-	return true;
+    char buff[255];
+    float l = 0;
+    
+    while (true) {
+        if (GetInput(prompt, buff, sizeof(buff)) != INPUT_RESULT_OK)
+            return false;
+        
+        if (parseFloat(buff, &l)) {
+            *value = l;
+            return true;
+        } else {
+            printf("Invalid input. Please enter a valid number.\n");
+        }
+    }
 }
 
 
 bool GetInputChar(char* prompt, char* value)
 {
-	char buff[255];
-	if (GetInput(prompt, buff, sizeof(buff)) != INPUT_RESULT_OK)
-		return false;
-	*value = buff[0];
-	return true;
+    char buff[255];
+    
+    while (true) {
+        if (GetInput(prompt, buff, sizeof(buff)) != INPUT_RESULT_OK)
+            return false;
+        
+        if (strlen(buff) != 1 || !(buff[0] == '+' || buff[0] == '-' || buff[0] == '*' || buff[0] == '/' || buff[0] == '%')) {
+            printf("Invalid input. Please enter a valid operator (+,-,*,/,%%).\n");
+        } else {
+            *value = buff[0];
+            return true;
+        }
+    }
 }
 
 

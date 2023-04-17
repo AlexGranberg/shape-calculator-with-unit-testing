@@ -8,7 +8,9 @@
 
 int choice(){
 while(1){
+    blue();
     printf("\nMenu\n");
+    reset();
     printf("1. Shapes\n");
     printf("2. Calculator\n");
     printf("3. RockPaperScissor\n");
@@ -28,6 +30,10 @@ while(1){
 
 void red () {
   printf("\033[1;31m");
+}
+
+void blue() {
+  printf("\e[0;34m");
 }
 
 void green () {
