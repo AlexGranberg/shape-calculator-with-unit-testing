@@ -80,7 +80,7 @@ void calcCircle(float *resultArea, float *resultCircumference){
 }
 
 void shapesMenu(){
-
+    system("cls");
     blue();
     printf("\n::: Shapes :::\n");
     reset();

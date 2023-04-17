@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "SafeInput.h"
 #include "functions.h"
+#include <stdlib.h>
 
 
 float calculator(float number1, float number2, char operator){
@@ -31,6 +32,7 @@ return result;
 }
 
 void calculatorMenu(){
+system("cls");
 float number1 = 0;
 float number2 = 0;
 char operator;

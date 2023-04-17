@@ -11,8 +11,11 @@ int CpuRandPick(){
 }
 
 void playGame(){
+    system("cls");
     int sel;
+    blue();
     printf("\nLets play som Rock, Paper, Scissor!\n");
+    reset();
     printf("Take your pick:\n");
     printf("1. Rock\n");
     printf("2. Paper\n");
