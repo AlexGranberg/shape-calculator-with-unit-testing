@@ -66,7 +66,12 @@ void calcTriangle(float *resultArea, float *resultCircumference){
     
     GetInputFloat("Enter the lenght: ", &side1);
     GetInputFloat("Enter the height: ", &side2);
-    GetInputFloat("Enter the angle: ", &angle);
+    do{
+        GetInputFloat("Enter the angle: ", &angle);
+        if(angle > 180 || angle < 1)
+            printf("Angle must be between 1 and 180\n");
+    }while(angle > 180 || angle < 1);
+    
     float side3 = calcHypotenuse(side1, side2, angle);
     *resultArea = side1 * side2 /2;
     *resultCircumference = side1 + side2 + side3;
