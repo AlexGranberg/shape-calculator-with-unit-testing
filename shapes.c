@@ -44,11 +44,8 @@ char* shapesSelection(){
 }
 }
 
-void calcRectangleParallelogram(float *resultArea, float *resultCircumference){
-    float side1 = 0;
-    float side2 = 0;
-    GetInputFloat("Enter the lenght: ", &side1);
-    GetInputFloat("Enter the height: ", &side2);
+
+void calcRectangleParallelogram(float side1, float side2, float *resultArea, float *resultCircumference){
     *resultArea = side1 * side2;
     *resultCircumference = (side1 + side2) * 2;
 }
@@ -77,9 +74,7 @@ void calcTriangle(float *resultArea, float *resultCircumference){
     *resultCircumference = side1 + side2 + side3;
 }
 
-void calcCircle(float *resultArea, float *resultCircumference){
-    float radius = 0;
-    GetInputFloat("Enter the radie: ", &radius);
+void calcCircle(float radius, float *resultArea, float *resultCircumference){
     *resultArea = PI * radius * radius;
     *resultCircumference = 2 * PI * radius;
 }
@@ -106,19 +101,29 @@ void shapesMenu(){
     float resultCircumference = 0;
 
     if(strcmp(text, rect) == 0){
-        calcRectangleParallelogram(&resultArea, &resultCircumference);
+        float side1 = 0;
+        float side2 = 0;
+        GetInputFloat("Enter the length: ", &side1);
+        GetInputFloat("Enter the height: ", &side2);
+        calcRectangleParallelogram(side1, side2, &resultArea, &resultCircumference);
         printf("\nThe area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, para) == 0){
-        calcRectangleParallelogram(&resultArea, &resultCircumference);
-        printf("\nThe area of the parallelogram is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
+        float side1 = 0;
+        float side2 = 0;
+        GetInputFloat("Enter the length: ", &side1);
+        GetInputFloat("Enter the height: ", &side2);
+        calcRectangleParallelogram(side1, side2, &resultArea, &resultCircumference);
+        printf("\nThe area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, triangle) == 0){
         calcTriangle(&resultArea, &resultCircumference);
         printf("\nThe area of the Triangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, circle) == 0){
-        calcCircle(&resultArea, &resultCircumference);
+        float radius = 0;
+        GetInputFloat("Enter the radie: ", &radius);
+        calcCircle(radius, &resultArea, &resultCircumference);
         printf("\nThe area of the Circle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }    
     else if(strcmp(text, exit) == 0){

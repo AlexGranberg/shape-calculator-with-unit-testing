@@ -1,9 +1,13 @@
 PROG=main.exe
+TEST=unittest.exe
 CFLAGS=-Wall -Werror
 DEPS=SafeInput.h shapes.h calculator.h functions.h rockPaperScissor.h
 SOURCES=functions.c main.c SafeInput.c shapes.c calculator.c rockPaperScissor.c
 CC=gcc
 DEBUG?=1
+GTEST=gtest
+LIBGTEST = C:\msys64\mingw64\lib\libgtest_main.a C:\msys64\mingw64\lib\libgtest.a
+
 ifeq ($(DEBUG), 1)
 	CFLAGS += -g
 	OUTPUTDIR=bin/debug
@@ -30,4 +34,10 @@ clean:
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-.PHONY: clean
+$(TEST): shapes.o testShapes.o SafeInput.o functions.o
+	g++ -o $@ $^ $(CFLAGS) -I $(GTEST) $(LIBGTEST)
+
+test: $(TEST)
+	./$(TEST)
+
+.PHONY: clean test
