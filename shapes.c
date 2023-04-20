@@ -56,19 +56,7 @@ float calcHypotenuse(float l, float h, float theta) {
     return c;
 }
 
-void calcTriangle(float *resultArea, float *resultCircumference){
-    float side1 = 0;
-    float side2 = 0;
-    float angle = 0;
-    
-    GetInputFloat("Enter the lenght: ", &side1);
-    GetInputFloat("Enter the height: ", &side2);
-    do{
-        GetInputFloat("Enter the angle: ", &angle);
-        if(angle > 180 || angle < 1)
-            printf("Angle must be between 1 and 180\n");
-    }while(angle > 180 || angle < 1);
-    
+void calcTriangle(float side1, float side2, float angle, float *resultArea, float *resultCircumference){
     float side3 = calcHypotenuse(side1, side2, angle);
     *resultArea = side1 * side2 /2;
     *resultCircumference = side1 + side2 + side3;
@@ -117,7 +105,20 @@ void shapesMenu(){
         printf("\nThe area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, triangle) == 0){
-        calcTriangle(&resultArea, &resultCircumference);
+        float side1 = 0;
+        float side2 = 0;
+        float angle = 0;
+    
+        GetInputFloat("Enter the lenght: ", &side1);
+        GetInputFloat("Enter the height: ", &side2);
+        
+        do{
+        GetInputFloat("Enter the angle: ", &angle);
+        if(angle > 180 || angle < 1)
+            printf("Angle must be between 1 and 180\n");
+        }while(angle > 180 || angle < 1);
+
+        calcTriangle(side1, side2, angle, &resultArea, &resultCircumference);
         printf("\nThe area of the Triangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, circle) == 0){

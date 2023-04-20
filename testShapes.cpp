@@ -39,3 +39,29 @@ TEST_F(ShapesTest, calculateCircleIsOK){
     ASSERT_FLOAT_EQ(expectedCircumference, actualCircumference);
 
 }
+
+TEST_F(ShapesTest, calculateTriangleIsOK){
+    //ARRANGE
+    float side1 = 3;
+    float side2 = 5;
+    float angle = 90;
+    float expectedArea = 7.5f;
+    float expectedCircumference = 13;
+    //ACT
+    float actualArea = 0;
+    float actualCircumference = 0;
+    calcTriangle(side1, side2, angle, &actualArea, &actualCircumference);
+    //ASSERT
+    ASSERT_FLOAT_EQ(expectedArea, actualArea);
+    ASSERT_FLOAT_EQ(expectedCircumference, actualCircumference);
+
+}
+
+TEST_F(ShapesTest, calcHypotenuseIsOK){
+    //ARRANGE
+    float expectedHypotenuse = 5.0f;
+    //ACT
+    float actualHypotenuse = calcHypotenuse(3.0f, 4.0f, 53.1301f); // 53.1301 degrees = arctan(4/3) = angle opposite to l
+    //ASSERT
+    ASSERT_FLOAT_EQ(expectedHypotenuse, actualHypotenuse);
+}
