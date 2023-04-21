@@ -11,21 +11,21 @@ protected:
     }    
 };
 
-TEST_F(ShapesTest, calculateRectangleAndParalellogramAreaAndCircumferenceIsOK){
+TEST_F(ShapesTest, calculateRectangleAndParalellogramIfAreaAndCircumferenceIsOK){
     //ARRANGE
     float expectedArea = 12.0f;
-    float expectedCircumference = 12.0f;
+    float expectedCircumference = 14.0f;
     //ACT
     float actualArea = 0;
     float actualCircumference = 0;
     calcRectangleParallelogram(3.0f, 4.0f, &actualArea, &actualCircumference);
     //ASSERT
     ASSERT_FLOAT_EQ(expectedArea, actualArea);
-    ASSERT_FLOAT_EQ(expectedCircumference, expectedArea);
+    ASSERT_FLOAT_EQ(expectedCircumference, actualCircumference);
 
 }
 
-TEST_F(ShapesTest, calculateCircleIsOK){
+TEST_F(ShapesTest, calculateCircleIfAreaAndCircumferenceIsOK){
     //ARRANGE
     float radius = 2;
     float expectedArea = 12.566371f;
@@ -40,7 +40,7 @@ TEST_F(ShapesTest, calculateCircleIsOK){
 
 }
 
-TEST_F(ShapesTest, calculateTriangleIsOK){
+TEST_F(ShapesTest, calculateTriangleIfAreaAndCircumferenceIsOK){
     //ARRANGE
     float side1 = 3;
     float side2 = 5;

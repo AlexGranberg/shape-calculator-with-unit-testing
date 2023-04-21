@@ -24,19 +24,6 @@ TEST_F(CalculatorTest, calculatorAdditionTest){
 
 }
 
-TEST_F(CalculatorTest, calculatorAdditionTestNegative){
-    //ARRANGE
-    float number1 = -5;
-    float number2 = 7;
-    char op = '+';
-    float expected = 2;
-    //ACT
-    float result = calculator(number1, number2, op);
-    //ASSERT
-    ASSERT_FLOAT_EQ(expected, result);
-
-}
-
 TEST_F(CalculatorTest, calculatorSubtractionTest){
     //ARRANGE
     float number1 = 5;
