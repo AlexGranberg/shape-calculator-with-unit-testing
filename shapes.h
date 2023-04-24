@@ -3,9 +3,12 @@
 
 void shapesMenu();
 char* shapesSelection();
-void calcRectangleParallelogram(float side1, float side2, float *resultArea, float *resultCircumference);
-void calcCircle(float radius, float *resultArea, float *resultCircumference);
-void calcTriangle(float side1, float side2, float angle, float *resultArea, float *resultCircumference);
+void calcRectangleParallelogramCircumference(float side1, float side2, float *resultCircumference);
+void calcRectangleParallelogramArea(float side1, float side2, float *resultArea);
+void calcCircleCircumference(float radius, float *resultCircumference);
+void calcCircleArea(float radius, float *resultArea);
+void calcTriangleCircumference(float side1, float side2, float angle, float *resultCircumference);
+void calcTriangleArea(float side1, float side2, float *resultArea);
 float calcHypotenuse(float l, float h, float theta);
 
 

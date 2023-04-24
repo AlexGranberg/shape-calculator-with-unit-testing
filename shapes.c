@@ -45,9 +45,12 @@ char* shapesSelection(){
 }
 
 
-void calcRectangleParallelogram(float side1, float side2, float *resultArea, float *resultCircumference){
-    *resultArea = side1 * side2;
+void calcRectangleParallelogramCircumference(float side1, float side2, float *resultCircumference){
     *resultCircumference = (side1 + side2) * 2;
+}
+
+void calcRectangleParallelogramArea(float side1, float side2, float *resultArea){
+    *resultArea = side1 * side2;
 }
 
 float calcHypotenuse(float l, float h, float theta) {
@@ -56,15 +59,21 @@ float calcHypotenuse(float l, float h, float theta) {
     return c;
 }
 
-void calcTriangle(float side1, float side2, float angle, float *resultArea, float *resultCircumference){
-    float side3 = calcHypotenuse(side1, side2, angle);
+void calcTriangleArea(float side1, float side2, float *resultArea){
     *resultArea = side1 * side2 /2;
+}
+
+void calcTriangleCircumference(float side1, float side2, float angle, float *resultCircumference){
+    float side3 = calcHypotenuse(side1, side2, angle);
     *resultCircumference = side1 + side2 + side3;
 }
 
-void calcCircle(float radius, float *resultArea, float *resultCircumference){
-    *resultArea = PI * radius * radius;
+void calcCircleCircumference(float radius, float *resultCircumference){
     *resultCircumference = 2 * PI * radius;
+}
+
+void calcCircleArea(float radius, float *resultArea){
+    *resultArea = PI * radius * radius;
 }
 
 void shapesMenu(){
@@ -93,7 +102,8 @@ void shapesMenu(){
         float side2 = 0;
         GetInputFloat("Enter the length: ", &side1);
         GetInputFloat("Enter the height: ", &side2);
-        calcRectangleParallelogram(side1, side2, &resultArea, &resultCircumference);
+        calcRectangleParallelogramCircumference(side1, side2, &resultCircumference);
+        calcRectangleParallelogramArea(side1, side2, &resultArea);
         printf("\nThe area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, para) == 0){
@@ -101,7 +111,8 @@ void shapesMenu(){
         float side2 = 0;
         GetInputFloat("Enter the length: ", &side1);
         GetInputFloat("Enter the height: ", &side2);
-        calcRectangleParallelogram(side1, side2, &resultArea, &resultCircumference);
+        calcRectangleParallelogramCircumference(side1, side2, &resultCircumference);
+        calcRectangleParallelogramArea(side1, side2, &resultArea);
         printf("\nThe area of the rectangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, triangle) == 0){
@@ -118,13 +129,15 @@ void shapesMenu(){
             printf("Angle must be between 1 and 180\n");
         }while(angle > 180 || angle < 1);
 
-        calcTriangle(side1, side2, angle, &resultArea, &resultCircumference);
+        calcTriangleCircumference(side1, side2, angle, &resultCircumference);
+        calcTriangleArea(side1, side2, &resultArea);
         printf("\nThe area of the Triangle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }
     else if(strcmp(text, circle) == 0){
         float radius = 0;
         GetInputFloat("Enter the radie: ", &radius);
-        calcCircle(radius, &resultArea, &resultCircumference);
+        calcCircleCircumference(radius, &resultCircumference);
+        calcCircleArea(radius, &resultArea);
         printf("\nThe area of the Circle is: %.2f and the circumference is: %.2f\n", resultArea, resultCircumference);
     }    
     else if(strcmp(text, exit) == 0){
