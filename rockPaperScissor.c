@@ -52,6 +52,19 @@ void printScoreToFile(char *result){
 
 }
 
+int determineResult(int pick, int sel) {
+    if ((pick == 1 && sel == 2) || (pick == 2 && sel == 3) || (pick == 3 && sel == 1)) {
+        green(); printf("You won!\n"); reset();
+        return 1;
+    } else if ((pick == 1 && sel == 3) || (pick == 2 && sel == 1) || (pick == 3 && sel == 2)) {
+        red(); printf("You lost!\n"); reset();
+        return -1;
+    } else {
+        yellow(); printf("It's a tie!\n"); reset();
+        return 0;
+    }
+}
+
 int CpuRandPick(){
     srand(time(NULL));
     int randNum = rand() % 3 + 1;
@@ -62,63 +75,40 @@ void playGame(){
     system("cls");
     int sel;
     blue();
-    printf("\nLets play som Rock, Paper, Scissor!\n");
+    printf("\nLet's play some Rock, Paper, Scissors!\n");
     reset();
     printf("Take your pick:\n");
     printf("1. Rock\n");
     printf("2. Paper\n");
-    printf("3. Scissor\n");
+    printf("3. Scissors\n");
     GetInputInt("", &sel);
-    int pick = CpuRandPick();
-    char result[25];
-    if(pick == 1 && sel == 2) {
-        printf("Computer chosed ROCK! "); green(); printf("You won\n"); reset();
-        sprintf(result, "%s", "win");
-        printScoreToFile(result);
-    }
-    else if(pick == 1 && sel == 3) {
-        printf("Computer chosed ROCK! "); red(); printf("You loose\n"); reset();
-        sprintf(result, "%s", "loose");
-        printScoreToFile(result);
-    }
-    else if(pick == 1 && sel == 1) {
-        printf("Computer chosed ROCK! \n"); yellow(); printf("It's a tie\n"); reset();
-        sprintf(result, "%s", "tie");
-        printScoreToFile(result);
-    }
 
-    else if(pick == 2 && sel == 2) {
-        printf("Computer chosed PAPER! \n"); yellow(); printf("It's a tie\n"); reset();
-        sprintf(result, "%s", "tie");
-        printScoreToFile(result);
+    int pick = CpuRandPick();
+    int result = 0;
+
+    switch (pick) {
+    case 1:
+        printf("Computer chose rock\n");
+        break;
+    case 2:
+        printf("Computer chose paper\n");
+        break;
+    case 3:
+        printf("Computer chose scissors\n");
+        break;
+}
+
+    result = determineResult(pick, sel);
+
+    char resultString[10];
+    if (result == 1) {
+        sprintf(resultString, "%s", "win");
+    } else if (result == -1) {
+        sprintf(resultString, "%s", "loss");
+    } else {
+        sprintf(resultString, "%s", "tie");
     }
-    else if(pick == 2 && sel == 3) {
-        printf("Computer chosed PAPER! \n"); green(); printf("You won\n"); reset();
-        sprintf(result, "%s", "win");
-        printScoreToFile(result);
-    }
-    else if(pick == 2 && sel == 1) {
-        printf("Computer chosed PAPER! \n"); red(); printf("You loose\n"); reset();
-        sprintf(result, "%s", "loose");
-        printScoreToFile(result);
-    }
-    
-    else if(pick == 3 && sel == 2) {
-        printf("Computer chosed SCISSOR! \n"); red(); printf("You loose\n"); reset();
-        sprintf(result, "%s", "loose");
-        printScoreToFile(result);
-    }
-    else if(pick == 3 && sel == 3) {
-        printf("Computer chosed SCISSOR! \n"); yellow(); printf("It's a tie\n"); reset();
-        sprintf(result, "%s", "tie");
-        printScoreToFile(result);
-    }
-    else if(pick == 3 && sel == 1) {
-        printf("Computer chosed SCISSOR! \n"); green(); printf("You won\n"); reset();
-        sprintf(result, "%s", "win");
-        printScoreToFile(result);
-    }
-    
+    printScoreToFile(resultString);
 }
 
 void winRate(){
