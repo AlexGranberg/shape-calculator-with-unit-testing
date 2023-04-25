@@ -5,6 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define ROCK 1
+#define PAPER 2
+#define SCISSOR 3
+
+
 void calculateWinRate(double *winRate, int *wins, int *total) {
     char line[80];
     FILE *scoreBoard = fopen("scoreboard.txt", "r");
@@ -52,11 +57,11 @@ void printScoreToFile(char *result){
 
 }
 
-int determineResult(int pick, int sel) {
-    if ((pick == 1 && sel == 2) || (pick == 2 && sel == 3) || (pick == 3 && sel == 1)) {
+int determineResult(int cpuPick, int userSel) {
+    if ((cpuPick == ROCK && userSel == PAPER) || (cpuPick == PAPER && userSel == SCISSOR) || (cpuPick == SCISSOR && userSel == ROCK)) {
         green(); printf("You won!\n"); reset();
         return 1;
-    } else if ((pick == 1 && sel == 3) || (pick == 2 && sel == 1) || (pick == 3 && sel == 2)) {
+    } else if ((cpuPick == ROCK && userSel == SCISSOR) || (cpuPick == PAPER && userSel == ROCK) || (cpuPick == SCISSOR && userSel == PAPER)) {
         red(); printf("You lost!\n"); reset();
         return -1;
     } else {
