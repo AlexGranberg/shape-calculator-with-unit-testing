@@ -26,6 +26,9 @@ $(PROG): $(OUTPUTDIR) $(OBJ)
 $(OUTPUTDIR)/%.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
+$(OUTPUTDIR)/%.o: %.cpp $(DEPS)
+	g++ -o $@ -c $< -I $(GTEST)
+
 clean:
 	@del /q "$(OUTPUTDIR)"
 	@del /q $(PROG)
@@ -34,7 +37,7 @@ clean:
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-$(TEST): shapes.o testShapes.o SafeInput.o functions.o calculator.o testCalculator.o rockPaperScissor.o testRockPaperScissor.o
+$(TEST): $(OUTPUTDIR)/shapes.o $(OUTPUTDIR)/testShapes.o $(OUTPUTDIR)/SafeInput.o $(OUTPUTDIR)/functions.o $(OUTPUTDIR)/calculator.o $(OUTPUTDIR)/testCalculator.o $(OUTPUTDIR)/rockPaperScissor.o $(OUTPUTDIR)/testRockPaperScissor.o
 	g++ -o $@ $^ $(CFLAGS) -I $(GTEST) $(LIBGTEST)
 
 test: $(TEST)
